@@ -25,9 +25,19 @@ function ManageCourse() {
               <br />
               <div className="row">
                 <div className="col-md-4">
-                  <div className="card card-custom" onClick={()=>{navigate("/Home")}}>
+                  <div
+                    className="card card-custom"
+                    onClick={() => {
+                      navigate("/ManageCourses/AddCourse");
+                    }}
+                  >
                     <img
-                      style={{ paddingLeft: 10, paddingTop: 10, width: 100, height: 100 }}
+                      style={{
+                        paddingLeft: 10,
+                        paddingTop: 10,
+                        width: 100,
+                        height: 100,
+                      }}
                       src={reglogo}
                       className="card-img-top"
                     />
@@ -71,7 +81,10 @@ function ManageCourse() {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-4">
+                <div
+                  className="col-md-4"
+                  onClick={() => navigate("/ManageCourses/ViewCourse")}
+                >
                   <div className="card card-custom">
                     <img
                       style={{

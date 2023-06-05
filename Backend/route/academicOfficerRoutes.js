@@ -5,6 +5,7 @@ require('dotenv').config();
 const { AcademicOfficer } = require('../model/AcademicOfficerModel');
 const { Course } = require('../model/StudentModel');
 const { Student } = require('../model/StudentModel');
+const { Teacher } = require('../model/TeacherModel');
 const { verifyToken } = require('../middleware/middleware');
 
 
@@ -47,11 +48,12 @@ router.post('/addCourse', verifyToken, async(req, res) => {
     taughtToClass: req.body.taughtToClass,
   });
 
+  console.log(course.name);
   try {
     const result = await course.save();
     res.send(result);
-  } catch (ex) {
-    res.status(400).send(ex.message);
+  } catch (error) {
+    res.status(400).send(error);
   }
 });
 
@@ -66,12 +68,13 @@ router.get('/getAllCourses', verifyToken, async(req, res) => {
 });
 
 // Read a specific course by ID
-router.get('/getCourse/:id', verifyToken, async(req, res) => {
+router.post('/getCourse', verifyToken, async(req, res) => {
   try {
-    const course = await Course.findById(req.params.id);
+    const name = req.body.name;
+    const course = await Course.findOne({name})
     if (!course) return res.status(404).send('Course not found.');
     res.send(course);
-  } catch (ex) {
+  } catch (err) {
     res.status(500).send('Internal server error.');
   }
 });
@@ -162,6 +165,12 @@ router.delete('/removeStudent/:id', verifyToken, async(req, res) => {
   res.send(student);
 });
 
+
+// get all teachers
+router.get('/getAllTeachers', verifyToken, async(req, res) => {
+  const teachers = await Teacher.find();
+  res.send(teachers);
+});
 
 module.exports = router;
 
