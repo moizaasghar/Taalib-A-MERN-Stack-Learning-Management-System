@@ -5,6 +5,7 @@ require('dotenv').config();
 const { AcademicOfficer } = require('../model/AcademicOfficerModel');
 const { Course } = require('../model/StudentModel');
 const { Student } = require('../model/StudentModel');
+const { Teacher } = require('../model/TeacherModel');
 const { verifyToken } = require('../middleware/middleware');
 
 
@@ -162,6 +163,12 @@ router.delete('/removeStudent/:id', verifyToken, async(req, res) => {
   res.send(student);
 });
 
+
+// get all teachers
+router.get('/getAllTeachers', verifyToken, async(req, res) => {
+  const teachers = await Teacher.find();
+  res.send(teachers);
+});
 
 module.exports = router;
 
