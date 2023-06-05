@@ -7,6 +7,7 @@ const { Course } = require('../model/StudentModel');
 const { Student } = require('../model/StudentModel');
 const { verifyToken } = require('../middleware/middleware');
 
+
 // Login route
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -29,7 +30,7 @@ router.post('/login', async (req, res) => {
         process.env.TOKEN_SECRET_KEY
     );
 
-    res.json({ token });
+    res.status(200).json({ token, academicOfficer });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
@@ -116,8 +117,9 @@ router.get('/getAllStudents', verifyToken, async(req, res) => {
 });
 
 // GET a specific student by ID
-router.get('/getStudent/:id', verifyToken, async(req, res) => {
-  const student = await Student.findById(req.params.id);
+router.post('/getStudent', verifyToken, async(req, res) => {
+  const rollNumber = req.body.rollNumber;
+  const student = await Student.findOne({ rollNumber });
   if (!student) return res.status(404).send('Student not found');
   res.send(student);
 });

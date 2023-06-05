@@ -52,11 +52,8 @@ function StudentForm() {
       rollNumber: Number(searchString)
     };
     try {
-      console.log(data);
-      console.log(token.token); 
       const response = await axios.post(
-        "http://localhost:3001/academicOfficers/getStudent",
-        data,
+        "http://localhost:3001/academicOfficers/getStudent",data,
         {
           headers: { token: token.token },
         }
@@ -70,6 +67,7 @@ function StudentForm() {
       setShowForm(true);
     } catch (error) {
       alert("Student not found");
+      console.log(error);
     }
   };
 
