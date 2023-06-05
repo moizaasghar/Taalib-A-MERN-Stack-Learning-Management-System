@@ -1,9 +1,9 @@
 import React from "react";
 import NavBar from "../nav";
 import SideBar from "../sideBar";
-import CourseForm from "./addCourseForm";
+import SearchForm from "./searchForm";
 
-function AddCourse() {
+function ViewCourse() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   return (
@@ -15,7 +15,7 @@ function AddCourse() {
             <SideBar />
           </div>
           <div className="col-md-8">
-            <CourseForm />
+            <SearchForm />
           </div>
         </div>
       </div>
@@ -23,4 +23,4 @@ function AddCourse() {
   );
 }
 
-export default AddCourse;
+export default ViewCourse;

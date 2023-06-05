@@ -2,78 +2,59 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function StudentForm() {
-  const [students, setStudents] = useState([]);
+function CourseForm() {
+  const [teachers, setTeachers] = useState([]);
   const navigate = useNavigate();
+ 
   useEffect(() => {
-    const getStudents = async () => {
+    const getTeachers = async () => {
       try {
         const token = JSON.parse(localStorage.getItem("user"));
         const response = await axios.get(
-          "http://localhost:3001/academicOfficers/getAllStudents",
+          "http://localhost:3001/academicOfficers/getAllTeachers",
           {
             headers: { token: token.token },
           }
         );
-        setStudents(response.data);
+        setTeachers(response.data);
       } catch (error) {
         console.error(error);
       }
     };
-    getStudents();
+    getTeachers();
   }, []);
 
+  
   const [name, setName] = useState("");
-  const [rollNumber, setRollNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [classValue, setClassValue] = useState("");
-  const [password, setPassword] = useState("");
+  const [instructor, setInstructor] = useState("");
+  const [credits, setCredits] = useState(-1);
+  const [taughtToClass, setTaughtToClass] = useState(-1);
+
 
   const classes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-  const GenerateRollNumber = () => {
-    let rollNumber = Math.floor(1000 + Math.random() * 9000);
-    const rollNumberExists = students.find(
-      (student) => student.rollNumber === rollNumber
-    );
-    if (rollNumberExists) {
-      GenerateRollNumber();
-    }
-    return rollNumber;
-  };
-
-  const generateEmail = (rollNumber, name) => {
-    // combine roll number and first 2 characters of name
-    const email = `${name.substring(0, 2)}${rollNumber}@gmail.com`;
-    return email;
-  };
+  const creditsArray = [1, 2, 3, 4];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const student = {
+    const course = {
       name,
-      rollNumber,
-      email,
-      class: classValue,
-      password,
+      instructor,
+      credits,
+      taughtToClass,
     };
 
     try {
       const token = JSON.parse(localStorage.getItem("user"));
       const response = await axios.post(
-        "http://localhost:3001/academicOfficers/addStudent",
-        student,
+        "http://localhost:3001/academicOfficers/addCourse",
+        course,
         {
           headers: { token: token.token },
         }
       );
-      localStorage.setItem("student", JSON.stringify(response.data));
-      setName("");
-      setRollNumber("");
-      setEmail("");
-      setClassValue("");
-      setPassword("");
-      navigate("/ManageStudents/RegisterStudent/StudentInfo");
+      localStorage.setItem("course", JSON.stringify(response.data));
+   
+      navigate("/ManageCourses/AddCourse/CourseInfo");
     } catch (error) {
       alert(error);
     }
@@ -93,70 +74,69 @@ function StudentForm() {
             value={name}
             onChange={(e) => {
               setName(e.target.value);
-              const rollNumber = GenerateRollNumber();
-              setRollNumber(rollNumber);
-              if (e.target.value.length >= 2) {
-                const email = generateEmail(rollNumber, e.target.value);
-                setEmail(email);
               }
-            }}
+            }
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="rollNumber">Roll Number</label>
-          <input
-            type="text"
-            className="form-control"
-            id="rollNumber"
-            value={rollNumber}
-            disabled
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            value={email}
-            disabled
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="class">Class</label>
+          <label htmlFor="instructor">Teacher</label>
           <select
             className="form-control"
-            id="class"
-            value={classValue}
-            onChange={(e) => setClassValue(e.target.value)}
+            id="instructor"
+            value={instructor}
+            onChange={(e) => setInstructor(e.target.value)}
             required
           >
-            <option value="">Select Class</option>
-            {classes.map((classOption) => (
-              <option key={classOption} value={classOption}>
-                {classOption}
+            <option value="">Select Teacher</option>
+            {teachers.map((teacher) => (
+              <option key={teacher._id} value={teacher._id}>
+                {teacher.name}
+              </option>
+            ))}
+          </select>
+
+        </div>
+        <div className="form-group">
+          <label htmlFor="credits">Credits</label>
+          <select 
+            className="form-control"
+            id="credits"
+            value={credits}
+            onChange={(e) => setCredits(e.target.value)}
+            required
+          >
+            <option value="">Select Credits</option>
+            {creditsArray.map((credit) => (
+              <option key={credit} value={credit}>
+                {credit}
               </option>
             ))}
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
+          <label htmlFor="taughtToClass">Offered To Class</label>
+          <select
             className="form-control"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            id="taughtToClass"
+            value={taughtToClass}
+            onChange={(e) => setTaughtToClass(e.target.value)}
             required
-          />
-        </div>
+          >
+            <option value="">Select Class</option>
+            {classes.map((classValue) => (
+              <option key={classValue} value={classValue}>
+                {classValue}
+              </option>
+            ))}
+          </select>
+        </div>        
         <button type="submit" className="btn btn-primary">
-          Register
+          Add Course
         </button>
       </form>
     </div>
   );
 }
 
-export default StudentForm;
+export default CourseForm;

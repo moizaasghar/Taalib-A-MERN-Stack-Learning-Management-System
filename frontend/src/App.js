@@ -10,6 +10,10 @@ import EditStudent from "./components/pages/Manage Student/editStudent";
 import ViewStudent from "./components/pages/Manage Student/viewStudent";
 import DeleteStudent from "./components/pages/Manage Student/deleteStudent";
 import StudentDelete from "./components/pages/Manage Student/delete";
+import AddCourse from "./components/pages/Manage Course/addCourse";
+import CourseInfo from "./components/pages/Manage Course/courseInfo";
+import ViewCourse from "./components/pages/Manage Course/viewCourse";
+
 
 function App() {
   return (
@@ -44,6 +48,10 @@ function App() {
         <Route path="/ManageStudents/DeleteStudent/StudentInfo" element={<StudentDelete />} />
         
         <Route path="/ManageCourses" element={<ManageCourse />} />
+        <Route path="/ManageCourses/AddCourse" element={<AddCourse />} />
+        <Route path="/ManageCourses/AddCourse/CourseInfo" element={<CourseInfo />} />
+        <Route path="/ManageCourses/ViewCourse" element={<ViewCourse />} />
+        <Route path="/ManageCourses/ViewCourse/CourseInfo" element={<CourseInfo />} />
       </Routes>
     </BrowserRouter>
   );
