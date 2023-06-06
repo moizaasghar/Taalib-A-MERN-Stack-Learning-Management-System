@@ -96,6 +96,7 @@ router.put('/updateCourse/:id', verifyToken, async(req, res) => {
     if (!course) return res.status(404).send('Course not found.');
     res.send(course);
   } catch (ex) {
+    console.log(ex);
     res.status(400).send(ex.message);
   }
 });
@@ -103,10 +104,22 @@ router.put('/updateCourse/:id', verifyToken, async(req, res) => {
 // Delete a specific course by ID
 router.delete('/removeCourse/:id', verifyToken, async(req, res) => {
   try {
-    const course = await Course.findByIdAndRemove(req.params.id);
-    if (!course) return res.status(404).send('Course not found.');
-    res.send(course);
-  } catch (ex) {
+    
+    const course = await Course.findById(req.params.id);
+    const deleteCourse = await Course.findByIdAndRemove(req.params.id);
+    
+    if (!deleteCourse) return res.status(404).send('Course not found.');
+    
+    var obj = new mongoose.Types.ObjectId(course.instructor);
+    console.log(obj);
+    const teacher = await Teacher.findOne({ _id: obj });
+    console.log(teacher);
+    console.log(course._id);
+    teacher.courses.pull(course._id);
+    await teacher.save();
+    res.send(deleteCourse);
+  } catch (error) {
+    console.log(error);
     res.status(500).send('Internal server error.');
   }
 });
@@ -178,15 +191,7 @@ router.post("/addCourseToTeacher", verifyToken, async (req, res) => {
   const teacher = await Teacher.findOne({ _id: req.body.teacher._id });
   if (!teacher) return res.status(404).send("Teacher not found");
 
-  const course = {
-    name: req.body.course.name,
-    instructor: req.body.course.instructor,
-    credits: req.body.course.credits,
-    taughtToClass: req.body.course.taughtToClass,
-  };
-
-  teacher.courses.push(course);
-  console.log(teacher);
+  teacher.courses.push(req.body.course);
   
   await new Promise((resolve) => setTimeout(resolve, 10000));
   await teacher.save();

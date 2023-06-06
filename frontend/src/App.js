@@ -15,6 +15,8 @@ import CourseInfo from "./components/pages/Manage Course/courseInfo";
 import ViewCourse from "./components/pages/Manage Course/viewCourse";
 import DeleteCourse from "./components/pages/Manage Course/deleteCourse";
 import CourseDelete from "./components/pages/Manage Course/delete";
+import EditForm from "./components/pages/Manage Course/editform";
+import EditCourse from "./components/pages/Manage Course/editCourse";
 
 
 function App() {
@@ -56,6 +58,9 @@ function App() {
         <Route path="/ManageCourses/ViewCourse/CourseInfo" element={<CourseInfo />} />
         <Route path="/ManageCourses/DeleteCourse" element={<DeleteCourse />} />
         <Route path="/ManageCourses/DeleteCourse/CourseInfo" element={<CourseDelete />} />
+        <Route path="/ManageCourses/EditCourse" element={<EditCourse />} />
+        <Route path="/ManageCourses/EditCourse/CourseInfo" element={<CourseInfo />} />
+
       </Routes>
     </BrowserRouter>
   );

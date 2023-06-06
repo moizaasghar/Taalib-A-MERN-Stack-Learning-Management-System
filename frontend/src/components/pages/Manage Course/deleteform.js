@@ -22,7 +22,6 @@ function DeleteForm() {
           headers: { token: token.token },
         }
       );
-
       localStorage.setItem("course", JSON.stringify(response.data));
       navigate("/ManageCourses/DeleteCourse/CourseInfo");
     } catch (error) {
@@ -37,7 +36,7 @@ function DeleteForm() {
       <h2>Search Course</h2>
       <form onSubmit={handleSearch}>
         <div className="form-group">
-          <label htmlFor="name">Roll Number</label>
+          <label htmlFor="name">Course Name</label>
           <input
             type="text"
             className="form-control"
