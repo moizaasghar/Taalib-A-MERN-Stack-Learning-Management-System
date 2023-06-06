@@ -7,6 +7,7 @@ const { Course } = require('../model/StudentModel');
 const { Student } = require('../model/StudentModel');
 const { Teacher } = require('../model/TeacherModel');
 const { verifyToken } = require('../middleware/middleware');
+const mongoose = require('mongoose');
 
 
 // Login route
@@ -172,5 +173,24 @@ router.get('/getAllTeachers', verifyToken, async(req, res) => {
   res.send(teachers);
 });
 
+
+router.post("/addCourseToTeacher", verifyToken, async (req, res) => {
+  const teacher = await Teacher.findOne({ _id: req.body.teacher._id });
+  if (!teacher) return res.status(404).send("Teacher not found");
+
+  const course = {
+    name: req.body.course.name,
+    instructor: req.body.course.instructor,
+    credits: req.body.course.credits,
+    taughtToClass: req.body.course.taughtToClass,
+  };
+
+  teacher.courses.push(course);
+  console.log(teacher);
+  
+  await new Promise((resolve) => setTimeout(resolve, 10000));
+  await teacher.save();
+  res.send(teacher);
+});
 module.exports = router;
 

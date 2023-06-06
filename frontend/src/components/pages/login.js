@@ -24,8 +24,7 @@ const LoginForm = () => {
       email,
       password,
     };
-
-    alert(JSON.stringify(data));
+    
     axios
       .post("http://localhost:3001/academicOfficers/login", data)
       .then((response) => {

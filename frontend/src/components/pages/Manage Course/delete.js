@@ -4,25 +4,25 @@ import SideBar from "../sideBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function StudentDelete() {
+function CourseDelete() {
   const navigate = useNavigate();
-  const student = JSON.parse(localStorage.getItem("student"));
+  const course = JSON.parse(localStorage.getItem("course"));
   
   const handleDelete = () => {
      const token = JSON.parse(localStorage.getItem("user"));
-    console.log(student._id);
+    console.log(course._id);
     console.log(token.token);
     axios
       .delete(
-        `http://localhost:3001/academicOfficers/removeStudent/${student._id}`,
+        `http://localhost:3001/academicOfficers/removeCourse/${course._id}`,
         {
           headers: { token: token.token },
         }
       )
       .then((response) => {
         console.log(response);
-        alert("Student Deleted");
-        navigate("/ManageStudents");
+        alert("Course Deleted");
+        navigate("/ManageCourses");
       })
       .catch((err) => {
         console.log(err);
@@ -40,39 +40,42 @@ function StudentDelete() {
           <div className="col-md-10">
             <div className="container">
               <br />
-              <h1>Student Information</h1>
+              <h1>Course Information</h1>
               <br />
-              <h1>{student.name}</h1>
+              <h1>{course.name}</h1>
               <br />
               <table className="table">
                 <tbody>
                   <tr>
-                    <th>Roll Number</th>
-                    <td>{student.rollNumber}</td>
+                    <th>Name</th>
+                    <td>{course.name}</td>
                   </tr>
                   <tr>
-                    <th>Email</th>
-                    <td>{student.email}</td>
+                    <th>Instructor</th>
+                    <td>{course.instructor}</td>
                   </tr>
                   <tr>
-                    <th>Password</th>
-                    <td>{student.password}</td>
+                    <th>Credits</th>
+                    <td>{course.credits}</td>
                   </tr>
                   <tr>
-                    <th>Class</th>
-                    <td>{student.class}</td>
+                    <th>Offered To Class</th>
+                    <td>{course.taughtToClass}</td>
                   </tr>
                   <tr>
                     <th>Registration Date</th>
-                    <td>{student.registrationDate}</td>
-                  </tr>
-                  <tr>
-                    <th>Fee Status</th>
-                    <td>{student.isFeePaid ? "Paid" : "Not Paid"}</td>
+                    <td>{course.registrationDate}</td>
                   </tr>
                 </tbody>
               </table>
-              <button className="btn btn-danger" onClick={()=>{handleDelete()}}>Delete</button>
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  handleDelete();
+                }}
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
@@ -81,4 +84,4 @@ function StudentDelete() {
   );
 }
 
-export default StudentDelete;
+export default CourseDelete;

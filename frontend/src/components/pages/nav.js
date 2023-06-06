@@ -3,6 +3,11 @@ import logo from "../images/logout.png";
 import "../css/nav.css";
 
 function NavBar() {
+
+  const handleLogout = () => {
+    localStorage.clear();
+  };
+
   return (
     <div>
       <nav
@@ -26,7 +31,13 @@ function NavBar() {
           id="navbarNavAltMarkup"
         >
           <div className="navbar-nav">
-            <a className="nav-item nav-link active garamond-text" href="/">
+            <a
+              className="nav-item nav-link active garamond-text"
+              href="/"
+              onClick={() => {
+                handleLogout();
+              }}
+            >
               <div className="garamond-text">
                 <h4>Logout</h4>
                 <img src={logo} alt="Logout" className="logout-image" />

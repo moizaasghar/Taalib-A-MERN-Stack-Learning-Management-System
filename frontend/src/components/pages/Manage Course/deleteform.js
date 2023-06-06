@@ -2,17 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function SearchForm() {
-    const navigate = useNavigate();
-    const [searchString, setSearchString] = useState("");
+function DeleteForm() {
+  const navigate = useNavigate();
+  const [searchString, setSearchString] = useState("");
 
-    const handleSearch = async (e) => {
-    
-        const token = JSON.parse(localStorage.getItem("user"));
+  const handleSearch = async (e) => {
+    const token = JSON.parse(localStorage.getItem("user"));
     e.preventDefault();
 
     const data = {
-      name : searchString,
+      name: searchString,
     };
 
     try {
@@ -23,9 +22,9 @@ function SearchForm() {
           headers: { token: token.token },
         }
       );
-    
+
       localStorage.setItem("course", JSON.stringify(response.data));
-      navigate("/ManageCourses/AddCourse/CourseInfo");
+      navigate("/ManageCourses/DeleteCourse/CourseInfo");
     } catch (error) {
       alert("Course not found");
     }
@@ -34,11 +33,11 @@ function SearchForm() {
   return (
     <div className="container">
       <br />
-      <h1>View Course Details</h1>
+      <h1>Remove Course</h1>
       <h2>Search Course</h2>
       <form onSubmit={handleSearch}>
         <div className="form-group">
-          <label htmlFor="searchString">Name</label>
+          <label htmlFor="name">Roll Number</label>
           <input
             type="text"
             className="form-control"
@@ -51,9 +50,9 @@ function SearchForm() {
         <button type="submit" className="btn btn-primary">
           Search
         </button>
-         </form>
-    </div> 
+      </form>
+    </div>
   );
 }
 
-export default SearchForm;
+export default DeleteForm;
