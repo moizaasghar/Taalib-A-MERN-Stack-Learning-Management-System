@@ -49,11 +49,12 @@ function StudentForm() {
     e.preventDefault();
 
     const data = {
-      rollNumber: Number(searchString)
+      rollNumber: Number(searchString),
     };
     try {
       const response = await axios.post(
-        "http://localhost:3001/academicOfficers/getStudent",data,
+        "http://localhost:3001/academicOfficers/getStudent",
+        data,
         {
           headers: { token: token.token },
         }

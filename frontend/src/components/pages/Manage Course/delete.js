@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 function CourseDelete() {
   const navigate = useNavigate();
   const course = JSON.parse(localStorage.getItem("course"));
-  
+
   const handleDelete = () => {
-     const token = JSON.parse(localStorage.getItem("user"));
+    const token = JSON.parse(localStorage.getItem("user"));
     axios
       .delete(
         `http://localhost:3001/academicOfficers/removeCourse/${course._id}`,
@@ -18,15 +18,14 @@ function CourseDelete() {
         }
       )
       .then((response) => {
-
         alert("Course Deleted");
         navigate("/ManageCourses");
       })
       .catch((err) => {
         alert("Error Deleting Course");
       });
-    };
-    
+  };
+
   return (
     <div>
       <NavBar />

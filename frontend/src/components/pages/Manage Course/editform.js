@@ -9,9 +9,8 @@ function EditForm() {
   const [instructor, setInstructor] = useState("");
   const [credits, setCredits] = useState(-1);
   const [taughtToClass, setTaughtToClass] = useState(-1);
-  const [registartionDate , setRegistartionDate] = useState("");
+  const [registartionDate, setRegistartionDate] = useState("");
   const [showForm, setShowForm] = useState(false);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,10 +32,10 @@ function EditForm() {
       );
 
       localStorage.setItem("course", JSON.stringify(response.data));
-      setName("")
-      setInstructor("")
-      setCredits(-1)
-      setTaughtToClass(-1)
+      setName("");
+      setInstructor("");
+      setCredits(-1);
+      setTaughtToClass(-1);
       navigate("/ManageCourses/EditCourse/CourseInfo");
     } catch (error) {
       alert(error);
@@ -48,11 +47,12 @@ function EditForm() {
     e.preventDefault();
 
     const data = {
-      name: searchString
+      name: searchString,
     };
     try {
       const response = await axios.post(
-        "http://localhost:3001/academicOfficers/getCourse",data,
+        "http://localhost:3001/academicOfficers/getCourse",
+        data,
         {
           headers: { token: token.token },
         }
@@ -66,7 +66,6 @@ function EditForm() {
       setShowForm(true);
     } catch (error) {
       alert("Student not found");
-    
     }
   };
 

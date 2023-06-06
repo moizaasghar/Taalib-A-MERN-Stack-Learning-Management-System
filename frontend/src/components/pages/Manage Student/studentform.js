@@ -42,11 +42,11 @@ function StudentForm() {
     return rollNumber;
   };
 
-const generateEmail = (rollNumber, name) => {
-  // combine roll number and first 2 characters of name
-  const email = `${name.substring(0, 2)}${rollNumber}@gmail.com`;
-  return email;
-};
+  const generateEmail = (rollNumber, name) => {
+    // combine roll number and first 2 characters of name
+    const email = `${name.substring(0, 2)}${rollNumber}@gmail.com`;
+    return email;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,9 +95,9 @@ const generateEmail = (rollNumber, name) => {
               setName(e.target.value);
               const rollNumber = GenerateRollNumber();
               setRollNumber(rollNumber);
-              if(e.target.value.length >= 2){
-              const email = generateEmail(rollNumber, e.target.value);
-              setEmail(email);
+              if (e.target.value.length >= 2) {
+                const email = generateEmail(rollNumber, e.target.value);
+                setEmail(email);
               }
             }}
             required

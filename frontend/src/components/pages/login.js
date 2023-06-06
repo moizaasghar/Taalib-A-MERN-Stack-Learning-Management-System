@@ -24,11 +24,10 @@ const LoginForm = () => {
       email,
       password,
     };
-    
+
     axios
       .post("http://localhost:3001/academicOfficers/login", data)
       .then((response) => {
-        
         localStorage.setItem("user", JSON.stringify(response.data));
         navigate("/Home");
       })

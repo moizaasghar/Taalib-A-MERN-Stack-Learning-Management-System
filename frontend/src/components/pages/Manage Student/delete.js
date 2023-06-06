@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 function StudentDelete() {
   const navigate = useNavigate();
   const student = JSON.parse(localStorage.getItem("student"));
-  
+
   const handleDelete = () => {
-     const token = JSON.parse(localStorage.getItem("user"));
+    const token = JSON.parse(localStorage.getItem("user"));
 
     axios
       .delete(
@@ -25,8 +25,8 @@ function StudentDelete() {
       .catch((err) => {
         alert("Error Deleting Student");
       });
-    };
-    
+  };
+
   return (
     <div>
       <NavBar />
@@ -70,7 +70,14 @@ function StudentDelete() {
                   </tr>
                 </tbody>
               </table>
-              <button className="btn btn-danger" onClick={()=>{handleDelete()}}>Delete</button>
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  handleDelete();
+                }}
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>

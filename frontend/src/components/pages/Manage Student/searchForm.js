@@ -3,12 +3,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function SearchForm() {
-    const navigate = useNavigate();
-    const [searchString, setSearchString] = useState("");
+  const navigate = useNavigate();
+  const [searchString, setSearchString] = useState("");
 
-    const handleSearch = async (e) => {
-    
-        const token = JSON.parse(localStorage.getItem("user"));
+  const handleSearch = async (e) => {
+    const token = JSON.parse(localStorage.getItem("user"));
     e.preventDefault();
 
     const data = {
@@ -23,7 +22,7 @@ function SearchForm() {
           headers: { token: token.token },
         }
       );
-    
+
       localStorage.setItem("student", JSON.stringify(response.data));
       navigate("/ManageStudents/ViewStudent/SearchResult");
     } catch (error) {
@@ -51,8 +50,8 @@ function SearchForm() {
         <button type="submit" className="btn btn-primary">
           Search
         </button>
-         </form>
-    </div> 
+      </form>
+    </div>
   );
 }
 

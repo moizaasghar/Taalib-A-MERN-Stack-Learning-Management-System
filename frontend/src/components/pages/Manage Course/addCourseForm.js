@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function CourseForm() {
   const [teachers, setTeachers] = useState([]);
   const navigate = useNavigate();
- 
+
   useEffect(() => {
     const getTeachers = async () => {
       try {
@@ -24,12 +24,10 @@ function CourseForm() {
     getTeachers();
   }, []);
 
-  
   const [name, setName] = useState("");
   const [instructor, setInstructor] = useState("");
   const [credits, setCredits] = useState(-1);
   const [taughtToClass, setTaughtToClass] = useState(-1);
-
 
   const classes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const creditsArray = [1, 2, 3, 4];
@@ -76,7 +74,6 @@ function CourseForm() {
     }
   };
 
-
   return (
     <div className="container">
       <br />
@@ -91,8 +88,7 @@ function CourseForm() {
             value={name}
             onChange={(e) => {
               setName(e.target.value);
-              }
-            }
+            }}
             required
           />
         </div>
@@ -112,11 +108,10 @@ function CourseForm() {
               </option>
             ))}
           </select>
-
         </div>
         <div className="form-group">
           <label htmlFor="credits">Credits</label>
-          <select 
+          <select
             className="form-control"
             id="credits"
             value={credits}
@@ -147,7 +142,7 @@ function CourseForm() {
               </option>
             ))}
           </select>
-        </div>        
+        </div>
         <button type="submit" className="btn btn-primary">
           Add Course
         </button>
