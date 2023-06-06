@@ -10,8 +10,6 @@ function CourseDelete() {
   
   const handleDelete = () => {
      const token = JSON.parse(localStorage.getItem("user"));
-    console.log(course._id);
-    console.log(token.token);
     axios
       .delete(
         `http://localhost:3001/academicOfficers/removeCourse/${course._id}`,
@@ -20,12 +18,12 @@ function CourseDelete() {
         }
       )
       .then((response) => {
-        console.log(response);
+
         alert("Course Deleted");
         navigate("/ManageCourses");
       })
       .catch((err) => {
-        console.log(err);
+        alert("Error Deleting Course");
       });
     };
     

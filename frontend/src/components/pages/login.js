@@ -28,12 +28,11 @@ const LoginForm = () => {
     axios
       .post("http://localhost:3001/academicOfficers/login", data)
       .then((response) => {
-        console.log(response.data);
+        
         localStorage.setItem("user", JSON.stringify(response.data));
         navigate("/Home");
       })
       .catch((error) => {
-        console.log(error);
         setError("Invalid email or password");
       });
   };

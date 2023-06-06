@@ -49,7 +49,6 @@ router.post('/addCourse', verifyToken, async(req, res) => {
     taughtToClass: req.body.taughtToClass,
   });
 
-  console.log(course.name);
   try {
     const result = await course.save();
     res.send(result);
@@ -96,7 +95,6 @@ router.put('/updateCourse/:id', verifyToken, async(req, res) => {
     if (!course) return res.status(404).send('Course not found.');
     res.send(course);
   } catch (ex) {
-    console.log(ex);
     res.status(400).send(ex.message);
   }
 });
@@ -111,15 +109,12 @@ router.delete('/removeCourse/:id', verifyToken, async(req, res) => {
     if (!deleteCourse) return res.status(404).send('Course not found.');
     
     var obj = new mongoose.Types.ObjectId(course.instructor);
-    console.log(obj);
+    
     const teacher = await Teacher.findOne({ _id: obj });
-    console.log(teacher);
-    console.log(course._id);
     teacher.courses.pull(course._id);
     await teacher.save();
     res.send(deleteCourse);
   } catch (error) {
-    console.log(error);
     res.status(500).send('Internal server error.');
   }
 });

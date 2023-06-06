@@ -10,8 +10,7 @@ function StudentDelete() {
   
   const handleDelete = () => {
      const token = JSON.parse(localStorage.getItem("user"));
-    console.log(student._id);
-    console.log(token.token);
+
     axios
       .delete(
         `http://localhost:3001/academicOfficers/removeStudent/${student._id}`,
@@ -20,12 +19,11 @@ function StudentDelete() {
         }
       )
       .then((response) => {
-        console.log(response);
         alert("Student Deleted");
         navigate("/ManageStudents");
       })
       .catch((err) => {
-        console.log(err);
+        alert("Error Deleting Student");
       });
     };
     

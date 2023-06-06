@@ -67,7 +67,6 @@ function StudentForm() {
       setShowForm(true);
     } catch (error) {
       alert("Student not found");
-      console.log(error);
     }
   };
 
