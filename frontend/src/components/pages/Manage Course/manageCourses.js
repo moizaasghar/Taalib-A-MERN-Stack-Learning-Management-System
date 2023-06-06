@@ -46,7 +46,12 @@ function ManageCourse() {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-4">
+                <div
+                  className="col-md-4"
+                  onClick={() =>
+                    navigate("/ManageCourses/EditCourse")
+                  }
+                >
                   <div className="card card-custom">
                     <img
                       style={{
@@ -69,7 +74,10 @@ function ManageCourse() {
             <br />
             <div className="container">
               <div className="row">
-                <div className="col-md-4">
+                <div
+                  className="col-md-4"
+                  onClick={() => navigate("/ManageCourses/DeleteCourse")}
+                >
                   <div className="card card-custom">
                     <img
                       style={{ paddingTop: 10, width: 100, height: 100 }}

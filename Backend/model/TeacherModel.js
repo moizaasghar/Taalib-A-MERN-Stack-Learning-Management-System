@@ -1,19 +1,25 @@
 const mongoose = require('mongoose');
 
 const CourseSchema = new mongoose.Schema({
-    name: {
-      type: String,
-      required: true
-    },
-    instructor: {
-      type: String,
-      required: true
-    },    
-    taughtToClass:{
-      type: Number,
-      required: true
-    }
-  });
+  name: {
+    type: String,
+    required: true,
+  },
+  instructor: {
+    type: String,
+    required: true,
+  },
+  taughtToClass: {
+    type: Number,
+    required: true,
+  },
+  registrationDate: {
+    type: Date,
+    default: Date.now,
+    required: true,
+  },
+});
+
 
 const TeacherSchema = new mongoose.Schema({
   name: {
@@ -26,13 +32,13 @@ const TeacherSchema = new mongoose.Schema({
     unique: true
   },
   employeeId: {
-    type: Number,
+    type: String,
     required: true,
     unique: true
     },
   courses: {
     type: [CourseSchema],
-    required: true
+    required: false
     },
     role: {
     type: String,
@@ -46,6 +52,11 @@ const TeacherSchema = new mongoose.Schema({
     password: {
       type: String,
       required: true
+    },
+    isSalaryPaid: {
+      type: Boolean,
+      default: false,
+      required: false
     }
 });
 

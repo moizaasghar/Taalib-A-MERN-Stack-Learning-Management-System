@@ -53,17 +53,34 @@ function CourseForm() {
         }
       );
       localStorage.setItem("course", JSON.stringify(response.data));
-   
+      addCourseToTeacher(response.data, instructor);
       navigate("/ManageCourses/AddCourse/CourseInfo");
     } catch (error) {
       alert(error);
     }
   };
 
+  const addCourseToTeacher = async (course, teacherId) => {
+    const teacher = teachers.find((teacher) => teacher._id === teacherId);
+    try {
+      const token = JSON.parse(localStorage.getItem("user"));
+      await axios.post(
+        "http://localhost:3001/academicOfficers/addCourseToTeacher",
+        { course, teacher },
+        {
+          headers: { token: token.token },
+        }
+      );
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+
   return (
     <div className="container">
       <br />
-      <h1>Register Student</h1>
+      <h1>Register Course</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
