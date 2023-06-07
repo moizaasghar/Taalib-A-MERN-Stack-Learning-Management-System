@@ -43,6 +43,7 @@ function SearchForm() {
             className="form-control"
             id="rollNumber"
             value={searchString}
+            min={1}
             onChange={(e) => setSearchString(e.target.value)}
             required
           />

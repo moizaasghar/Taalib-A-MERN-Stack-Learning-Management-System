@@ -1,10 +1,18 @@
 import React from "react";
 import logo from "../images/logout.png";
 import "../css/nav.css";
+import { useEffect } from "react";
 
-function NavBar() {
+function NavBar() {  
+  useEffect(() => {
+    if (localStorage.getItem("user") === null) {
+      window.location.href = "/";
+    }
+
+}, []);
 
   const handleLogout = () => {
+    localStorage.removeItem("user");
     localStorage.clear();
   };
 

@@ -2,6 +2,9 @@ import React from "react";
 
 function Profile() {
   const user1 = JSON.parse(localStorage.getItem("user"));
+  if (!user1) {
+    window.location.href = "/";
+  }
   const user = user1.academicOfficer;
   return (
     <div>

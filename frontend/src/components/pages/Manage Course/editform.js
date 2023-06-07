@@ -123,6 +123,8 @@ function EditForm() {
               className="form-control"
               id="credits"
               value={credits}
+              min={1}
+              max={4}
               onChange={(e) => setCredits(e.target.value)}
               required
             />
@@ -134,6 +136,8 @@ function EditForm() {
               className="form-control"
               id="taughtToClass"
               value={taughtToClass}
+              min={1}
+              max={10}
               onChange={(e) => setTaughtToClass(e.target.value)}
               required
             />

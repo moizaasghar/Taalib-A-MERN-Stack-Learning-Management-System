@@ -83,6 +83,7 @@ function StudentForm() {
             type="number"
             className="form-control"
             id="rollNumber"
+            min={1}
             value={searchString}
             onChange={(e) => setSearchString(e.target.value)}
             required
@@ -132,9 +133,11 @@ function StudentForm() {
           <div className="form-group">
             <label htmlFor="class">Class</label>
             <input
-              type="text"
+              type="number"
               className="form-control"
               id="class"
+              min={1}
+              max={10}
               value={classValue}
               onChange={(e) => setClassValue(e.target.value)}
               required

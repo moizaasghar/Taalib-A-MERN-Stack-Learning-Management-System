@@ -44,6 +44,7 @@ function DeleteForm() {
             id="rollNumber"
             value={searchString}
             onChange={(e) => setSearchString(e.target.value)}
+            min={1}
             required
           />
         </div>
